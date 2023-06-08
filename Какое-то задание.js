@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+import React, { useState, useCallback, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // Функция которая имитирует вычисления
 // Ничего не делает, только висит ms миллисекунд, и всё
