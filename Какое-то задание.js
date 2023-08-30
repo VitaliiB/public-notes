@@ -22,6 +22,14 @@ const TableHeader = React.memo(function({ headers }) {
   ));
 });
 
+const Label = React.memo(function({ children }) {
+  return (
+    <div>
+      {children}
+    </div>
+  );
+});
+
 function Table({ list }) {
   const [filter, setFilter] = useState('');
   const [filteredList, setFilteredList] = useState(filterList(list, filter));
@@ -41,6 +49,7 @@ function Table({ list }) {
   return (
     <>
       <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      <Label><span>Список элементов</span></Label>
       <TableHeader headers={['ID', 'Название', 'Описание']} />
       {filteredList.map((element, index) => {
         const { id, name, description } = element;
