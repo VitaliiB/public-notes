@@ -22,7 +22,7 @@ const TableHeader = React.memo(function({ headers }) {
   ));
 });
 
-const Label = React.memo(function({ children }) {
+const Title = React.memo(function({ children }) {
   return (
     <div>
       {children}
@@ -49,7 +49,7 @@ function Table({ list }) {
   return (
     <>
       <input value={filter} onChange={(e) => setFilter(e.target.value)} />
-      <Label><span>Список элементов</span></Label>
+      <Title><span>Список элементов</span></Title>
       <TableHeader headers={['ID', 'Название', 'Описание']} />
       {filteredList.map((element, index) => {
         const { id, name, description } = element;
