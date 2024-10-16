@@ -31,11 +31,11 @@ const Title = React.memo(function({ children }) {
 });
 
 function Table({ list }) {
-  const [filter, setFilter] = useState('');
-  const [suggests, setSuggests] = useState([]);
-  const [filteredList, setFilteredList] = useState(filterList(list, filter));
+  let [filter, setFilter] = useState('');
+  let [suggests, setSuggests] = useState([]);
+  let [filteredList, setFilteredList] = useState(filterList(list, filter));
 
-  const clearFilter = useCallback((event) => {
+  let clearFilter = useCallback((event) => {
     if (event.key === "Escape") {
       setFilter('');
     }
@@ -73,7 +73,7 @@ function Table({ list }) {
               <input value={name} onChange={(e) => element.name = e.target.value} />
             </div>
             <div>
-              {description}
+              {description && description}
             </div>
           </div>
         );
