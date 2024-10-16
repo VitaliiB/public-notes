@@ -32,6 +32,7 @@ const Title = React.memo(function({ children }) {
 
 function Table({ list }) {
   const [filter, setFilter] = useState('');
+  const [suggests, setSuggests] = useState([]);
   const [filteredList, setFilteredList] = useState(filterList(list, filter));
 
   const clearFilter = useCallback((event) => {
@@ -43,12 +44,21 @@ function Table({ list }) {
   useEffect(() => {
     setFilteredList(filterList(list, filter));
 
+    fetch(`/suggests/${filter}`).then(async (response) => {
+      if (response.ok) {
+        setSuggests(await response.json());
+      }
+    });
+
     document.addEventListener('keydown', clearFilter);
   }, [list, filter, clearFilter]);
 
   return (
     <>
       <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      {
+        suggests.map((suggest) => (<div key={suggest} onClick={() => setFilter(suggest)}>{suggest}</div>))
+      }
       <Title><span>Список элементов</span></Title>
       <TableHeader headers={['ID', 'Название', 'Описание']} />
       {filteredList.map((element, index) => {
